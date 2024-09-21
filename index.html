@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My love</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&display=swap');
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 48px;
+            color: #ffffff;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            animation: slideIn 1.5s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cofres-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .cofre {
+            width: 150px;
+            height: 150px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-family: 'Dancing Script', cursive;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .cofre:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        #cofre1 { background-color: #fdd835; } /* Amarillo */
+        #cofre2 { background-color: #ff80ab; } /* Rosado */
+        #cofre3 { background-color: #00bcd4; } /* Celeste */
+        #cofre4 { background-color: #7b1fa2; } /* Púrpura */
+        #cofre5 { background-color: #8bc34a; } /* Verde claro */
+        #cofre6 { background-color: #ff5252; } /* Rojo */
+        #cofreEspecial { background-color: #80f8de; } /* Dorado especial */
+
+        .mensaje {
+            margin-top: 20px;
+            font-size: 18px;
+            color: red;
+        }
+
+        .mini-carta {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            display: none;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            font-family: 'Dancing Script', cursive;
+            font-size: 22px;
+            line-height: 1.6;
+            color: #333;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .mini-carta-especial {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            font-family: 'Dancing Script', cursive;
+            font-size: 24px;
+            color: #333;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .password-container {
+            margin-top: 10px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+            margin-bottom: 10px;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .audio-control {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>"For  My   Love"</h1>
+
+    <div class="cofres-container">
+        <div id="cofre1" class="cofre" onclick="abrirCofre(1)">💛</div>
+        <div id="cofre2" class="cofre" onclick="abrirCofre(2)">💗</div>
+        <div id="cofre3" class="cofre" onclick="abrirCofre(3)">💙</div>
+        <div id="cofre4" class="cofre" onclick="abrirCofre(4)">💜</div>
+        <div id="cofre5" class="cofre" onclick="abrirCofre(5)">💚</div>
+        <div id="cofre6" class="cofre" onclick="abrirCofre(6)">❤️</div>
+        <div id="cofreEspecial" class="cofre" onclick="abrirCofreEspecial()">YOU</div>
+    </div>
+
+    <div class="password-container" id="passwordContainer">
+        <input type="text" id="passwordInput" placeholder="Ingresa la contraseña" />
+        <button onclick="verificarContraseña()">Abrir❤️</button>
+        <div class="mensaje" id="mensajeError"></div>
+    </div>
+
+    <!-- Mini Cartas -->
+    <div class="mini-carta" id="miniCarta1">"Bueno lo encontro Jajs, espero que este bien mor, solo le queria decir que siempre mantenga esa alegria que me hace tan feliz y recuerda que siempre me vas a gustar sin importar el momento ""K""</div>
+    <div class="mini-carta" id="miniCarta2">"Ay mor no este molesta o enojada :/ si el causante de su enojo soy yo, me disculpo por algo que hizo o dije y recuerda te amo, no lo olvides y tampoco lo dudes, De Yop para Tup  ""E"" </div>
+    <div class="mini-carta" id="miniCarta3">"Morrrrrr :/ no me gusta que este triste de la unica persona que me llega a sacar una sonrisa sin importar el momento ajjs y recuerda que eres fuerte y grandiosa y eso me encanta de tì, No lo olvides MyLove < 3 ""A""</div>
+    <div class="mini-carta" id="miniCarta4">"More no este decaida o desmotivada yo se que puede cualquier cosa por eres capaz de todo y eso es grandioso, que tu desmotivacion no te deje estancada, Yo se que puedes < 3 ""N""</div>
+    <div class="mini-carta" id="miniCarta5">"Ay mor no este Preocupada o algustiada se que puede salir de esa preocupacion, eres grandiosa en todo lo que haces, esa alegria y energia es unica, y no dejes que tu angustia te quita esa parte de ti Muak  "" L"</div>
+    <div class="mini-carta" id="miniCarta6">"Mis razones de amarte son tantas que ya nisiquiera se que poner de las cuantas que tengo en mi cabeza, solo se que tu eres mi razon de amar, enseñame esa parte de ti, en la cual siempre soy feliz ese pedazo de alegria que me produce solo con verte, ¿es raro no? como una persona que amas tanto te produce tantas emociones con tan solo su presencia.Me Encantas ahora, mañana y siempre ""V"""</div>
+
+    <!-- Cofre Especial -->
+    <div id="miniCartaEspecial" class="mini-carta-especial">
+        "Bueno MiLove espero y encuentros esto antes de que se borre la pagina, Esto es un pedacito de mi, Espero que te guste por cierto Almuerze >:c."
+        <div class="audio-control">
+            <audio controls>
+                <source src="webiwabo.m4a" type="audio/mpeg">
+                Tu navegador no soporta este elemento de audio.
+            </audio>
+        </div>
+    </div>
+
+    <script>
+        const contraseñas = {
+            1: "HAPPYLOVES",
+            2: "NOTEENOJES",
+            3: "TECUBROYOP",
+            4: "SUEÑOPORTI",
+            5: "AQUITOYMOR",
+            6: "CONTIGOYOP",
+            especial: "KEANLV"
+        };
+
+        let cofreSeleccionado = null;
+
+        function abrirCofre(cofreNum) {
+            cofreSeleccionado = cofreNum;
+            const passwordContainer = document.getElementById("passwordContainer");
+            const inputField = document.getElementById("passwordInput");
+
+            // Ocultar todas las mini cartas
+            ocultarTodasLasCartas();
+
+            passwordContainer.style.display = 'flex';
+            inputField.style.borderColor = getColorCofre(cofreNum);
+            inputField.value = '';
+            document.getElementById("mensajeError").textContent = "";
+        }
+
+        function abrirCofreEspecial() {
+            cofreSeleccionado = "especial";
+            const inputField = document.getElementById("passwordInput");
+            inputField.style.borderColor = '#ffd700'; // Dorado
+            inputField.value = '';
+            document.getElementById("mensajeError").textContent = "";
+            document.body.style.backgroundColor = '#ffd700';
+
+            ocultarTodasLasCartas(); // Ocultar cualquier otra carta abierta
+
+            verificarContraseña();
+        }
+
+        function verificarContraseña() {
+            const passwordInput = document.getElementById("passwordInput").value;
+            const mensajeError = document.getElementById("mensajeError");
+
+            if (passwordInput === contraseñas[cofreSeleccionado]) {
+                mensajeError.textContent = "";
+
+                setTimeout(() => {
+                    if (cofreSeleccionado === "especial") {
+                        mostrarCartaEspecial();
+                    } else {
+                        mostrarCarta(cofreSeleccionado);
+                    }
+                }, 500); // Espera 500ms antes de mostrar la mini carta
+            } else {
+                mensajeError.textContent = "Contraseña incorrecta. Inténtalo de nuevo.";
+            }
+        }
+
+        function mostrarCarta(cofreNum) {
+            const carta = document.getElementById(`miniCarta${cofreNum}`);
+            carta.style.display = 'block';
+            setTimeout(() => {
+                carta.style.opacity = 1;
+            }, 100); // Aparece la carta con un efecto de desvanecimiento
+        }
+
+        function mostrarCartaEspecial() {
+            const cartaEspecial = document.getElementById("miniCartaEspecial");
+            cartaEspecial.style.display = 'block';
+            setTimeout(() => {
+                cartaEspecial.style.opacity = 1;
+            }, 100); // Aparece la carta especial con un efecto de desvanecimiento
+        }
+
+        function ocultarTodasLasCartas() {
+            const cartas = document.querySelectorAll('.mini-carta');
+            const cartaEspecial = document.getElementById("miniCartaEspecial");
+            cartas.forEach(carta => {
+                carta.style.display = 'none';
+                carta.style.opacity = 0;
+            });
+            cartaEspecial.style.display = 'none';
+            cartaEspecial.style.opacity = 0;
+        }
+
+        function getColorCofre(cofreNum) {
+            switch (cofreNum) {
+                case 1: return '#fdd835'; // Amarillo
+                case 2: return '#ff80ab'; // Rosado
+                case 3: return '#00bcd4'; // Celeste
+                case 4: return '#7b1fa2'; // Púrpura
+                case 5: return '#8bc34a'; // Verde claro
+                case 6: return '#ff5252'; // Rojo
+                default: return '#000'; // Negro por defecto
+            }
+        }
+    </script>
+
+</body>
+</html>
